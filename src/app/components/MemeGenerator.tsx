@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 // MemeGenerator.js
 import React, { useRef, useState, useEffect } from 'react';
@@ -9,11 +9,14 @@ const MemeGenerator = () => {
     const canvasRef = useRef(null);
     const inputContainerRef: any = useRef(null);
     const downloadLinkRef: any = useRef(null);
-    const imageRef = useRef(new Image());
+    const imageRef:any = useRef(null);
 
     useEffect(() => {
-        imageRef.current.src = './assets/milei_meme.jpg'; // Ruta de tu imagen
-        imageRef.current.onload = updateCanvas;
+        if (typeof window !== 'undefined') {
+            imageRef.current = new window.Image();
+            imageRef.current.src = './assets/milei_meme.jpg'; // Ruta de tu imagen
+            imageRef.current.onload = updateCanvas;
+          }
     }, []);
 
     const updateCanvas = () => {
